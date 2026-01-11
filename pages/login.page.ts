@@ -6,6 +6,7 @@ export class LoginPage {
   readonly passwordInput: Locator;
   readonly loginButton: Locator;
   readonly errorMessage: Locator;
+  readonly pageTitle: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -13,6 +14,7 @@ export class LoginPage {
     this.passwordInput = page.locator('#password');
     this.loginButton = page.locator('#login-button');
     this.errorMessage = page.locator('[data-test="error"]');
+    this.pageTitle = page.locator('.title');
   }
 
   async goto() {
@@ -26,7 +28,8 @@ export class LoginPage {
   }
 
   async expectLoginSuccess() {
-    await expect(this.page).toHaveURL(/inventory/);
+  await expect(this.page).toHaveURL(/inventory/);
+  await expect(this.pageTitle).toHaveText('Products');
   }
 
   async expectLoginFailure() {
