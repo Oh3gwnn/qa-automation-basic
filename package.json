@@ -1,0 +1,27 @@
+{
+  "name": "qa-automation-basic",
+  "version": "1.0.0",
+  "description": "본 문서는 Sauce Demo 웹 애플리케이션에 대해 테스트 전략을 정의하고, 자동화 테스트의 범위와 접근 방식을 명확히 하기 위함임.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oh3gwnn/qa-automation-basic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Oh3gwnn/qa-automation-basic/issues"
+  },
+  "homepage": "https://github.com/Oh3gwnn/qa-automation-basic#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.6"
+  }
+}
