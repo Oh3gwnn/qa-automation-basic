@@ -21,3 +21,7 @@ class ShopifyClient:
             "quantity": quantity,
         }
         return self.session.post(url, data=data, timeout=10)
+    
+    def get_cart(self):
+        url = f"{self.base_url}/cart.js"
+        return self.session.get(url, timeout=10)

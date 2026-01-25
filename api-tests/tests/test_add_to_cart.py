@@ -28,3 +28,18 @@ def test_add_to_cart_contract():
     assert added.id == VARIANT_ID
     assert added.quantity == 1
     assert added.title
+
+def test_cart_state_reflects_added_item():
+    client = ShopifyClient(BASE_URL)
+
+    # add
+    res_add = client.add_to_cart(variant_id=VARIANT_ID, quantity=1)
+    assert res_add.status_code == 200, res_add.text
+
+    # verify cart
+    res_cart = client.get_cart()
+    assert res_cart.status_code == 200, res_cart.text
+
+    cart = res_cart.json()
+    assert cart["item_count"] >= 1
+    assert any(item["id"] == VARIANT_ID and item["quantity"] >= 1 for item in cart["items"])
