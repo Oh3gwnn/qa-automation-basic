@@ -19,7 +19,12 @@ class LoginPage:
         self.login_button.click()
 
     def expect_login_success(self):
-        expect(self.page).to_have_url(lambda url: "/inventory" in url)
+        # lambda -> re
+        # expect(self.page).to_have_url(lambda url: "/inventory" in url)
+        # expect(self.page_title).to_have_text('Products')
+        
+        import re
+        expect(self.page).to_have_url(re.compile(r".*/inventory\.html"))
         expect(self.page_title).to_have_text('Products')
 
     def expect_login_failure(self):
