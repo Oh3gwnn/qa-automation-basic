@@ -1,0 +1,6 @@
+pytest
+pytest-playwright   # 추가: Playwright와 Pytest 연동
+requests
+pydantic
+python-dotenv
+pytest-xdist        # 추가: 병렬 실행용
