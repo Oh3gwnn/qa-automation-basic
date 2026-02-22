@@ -21,3 +21,14 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Test Reports
+*.html
+/report/
+
+# Logs
+*.log
+
+# IDE settings
+.vscode/
+.idea/
