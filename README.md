@@ -9,10 +9,11 @@
 
 ## 3. Test Scope
 ### In Scope
-- 사용자 로그인
-- 상품 목록 조회
-- 상품 장바구니 추가/삭제
-- 장바구니 페이지 이동
+  - **API Layer**: 장바구니 추가/삭제 컨트랙트 검증 및 상태 코드 확인 (Shopify API)
+
+  - **UI Layer**: 주요 비즈니스 플로우(로그인, 상품 선택) E2E 테스트
+
+  - **Hybrid**: API로 데이터를 생성하고 UI로 결과를 확인하는 효율적인 테스트 방식
 
 ### Out of Scope
 - 결제 기능
@@ -25,9 +26,13 @@
 - Regression Test
 
 ## 5. Automation Strategy
-- Playwright를 사용한 E2E 테스트 자동화
-- 주요 사용자 플로우 중심 자동화
-- 반복 실행이 잦은 테스트 우선 자동화
+- Architecture: Page Object Model(POM)을 적용하여 유지보수성 향상 (진행 중)
+
+- Configuration: python-dotenv를 활용한 민감 정보(.env) 관리 및 환경별 유연한 대응
+
+- Robustness: UTF-8 기반 환경 설정 최적화 및 에러 핸들링 로직 포함
+
+- Reporting: pytest-html을 활용한 자동화된 테스트 결과 리포팅 및 실패 시 스크린샷 캡처 (예정)
 
 ## 6. Test Environment
 - Browser: Chromium
@@ -35,5 +40,6 @@
 - Test Data: 고정 테스트 계정 사용
 
 ## 7. Risks & Mitigation
-- 테스트 데이터 변경으로 인한 실패 가능성  
-  → 테스트 전 데이터 상태 확인
+- 민감 정보 노출 리스크: .gitignore 및 환경 변수 관리를 통해 보안성 강화
+
+- 테스트 환경 일관성: 환경 변수 로드 실패 시 테스트 즉시 중단 및 명확한 에러 메시지 제공

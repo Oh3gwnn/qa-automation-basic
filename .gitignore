@@ -10,7 +10,7 @@ venv/
 __pycache__/
 *.pyc
 
-# Environment
+# Environment(참고 파일로 .env.example 생성해놓음)
 .env
 
 # OS & IDE
