@@ -5,6 +5,7 @@ from src.contracts.schemas import AddToCartResponse
 
 BASE_URL = os.getenv("BASE_URL")
 VARIANT_ID = os.getenv("VARIANT_ID")
+# VARIANT_ID = 12345678 # 테스트 실패용 더미 데이터
 
 def test_add_to_cart_contract():
     """

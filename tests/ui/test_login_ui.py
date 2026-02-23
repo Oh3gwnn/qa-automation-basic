@@ -23,6 +23,9 @@ pytest tests/ui/test_login_ui.py --tracing on
 playwright show-trace test-results/나타난-폴더-이름/trace.zip
 ex1) playwright show-trace test-results/tests-ui-test-login-ui-py-test-login-failure-chromium/trace.zip
 ex2) playwright show-trace test-results/tests-ui-test-login-ui-py-test-login-success-chromium/trace.zip
+
+#4 스크린샷 추가 HTML 리포트
+pytest --screenshot=only-on-failure --html=reports/result.html --self-contained-html
 '''
 
 def test_login_success(page: Page):
@@ -32,6 +35,7 @@ def test_login_success(page: Page):
     # 2. 동작 수행 (성공 케이스)
     login_page.goto()
     login_page.login("standard_user", "secret_sauce")
+    #login_page.login("standard_user", "wrong_password") # 실패용 더미 데이터
     
     # 3. 검증
     login_page.expect_login_success()
