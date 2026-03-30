@@ -1,9 +1,9 @@
 import os
-import pytest
+
 from src.clients.shopify_client import ShopifyClient
 from src.contracts.schemas import AddToCartResponse
 
-BASE_URL = os.getenv("BASE_URL")
+BASE_URL = os.getenv("API_BASE_URL")
 VARIANT_ID = os.getenv("VARIANT_ID")
 # VARIANT_ID = 12345678 # 테스트 실패용 더미 데이터
 

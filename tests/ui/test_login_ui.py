@@ -11,7 +11,7 @@ pytest tests/ui/test_login_ui.py --html=report.html --self-contained-html
 > --html=report_ui_login_qa_20260222.html : 이런식으로 작성할 수도 있음, 당연히 한 폴더에 모으기도 가능
 > --self-contained-html : 파일 하나에 모든 내용이 담김(CSS, 로고 등)
 #2-2 리포트 살펴보기
-start report.html
+start report.html (mac에서는 open report.html)
 - Duration: 각 테스트 케이스가 몇 초나 걸렸는지 (성능 측정의 기초)
 - Status: 초록색 Passed가 잘 떠 있는지
 - Environment: 파이썬 버전, OS 등 테스트가 실행된 환경 정보

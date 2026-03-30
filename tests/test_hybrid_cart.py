@@ -1,6 +1,7 @@
 import pytest
 import os
 from dotenv import load_dotenv
+from pages.login_page import LoginPage
 from src.clients.shopify_client import ShopifyClient
 from playwright.sync_api import Page, expect
 
@@ -9,14 +10,13 @@ load_dotenv()
 
 def test_api_add_to_cart_and_ui_verify(page: Page):
     # 설정 (실제 Shopify 스토어 URL과 테스트용 상품 ID 넣기)
-    # BASE_URL = "https://sauce-demo.myshopify.com" 
     # VARIANT_ID = 611952521  # 테스트용 상품 번호
 
-    BASE_URL = os.getenv("BASE_URL")
+    API_BASE_URL = os.getenv("API_BASE_URL")
     VARIANT_ID = os.getenv("VARIANT_ID")
 
     # 1. API로 상품 담기
-    client = ShopifyClient(BASE_URL)
+    client = ShopifyClient(API_BASE_URL) #"https://sauce-demo.myshopify.com"
     response = client.add_to_cart(variant_id=VARIANT_ID, quantity=2)
     assert response.status_code == 200
 
@@ -24,13 +24,14 @@ def test_api_add_to_cart_and_ui_verify(page: Page):
     # requests의 쿠키를 playwright 형식으로 변환
     api_cookies = client.session.cookies.get_dict()
     playwright_cookies = [
-        {"name": name, "value": value, "url": BASE_URL}
+        {"name": name, "value": value, "url": API_BASE_URL}
         for name, value in api_cookies.items()
     ]
     page.context.add_cookies(playwright_cookies)
 
     # 3. UI로 장바구니 페이지 접속
-    page.goto(f"{BASE_URL}/cart")
+    login_page = LoginPage(page)
+    login_page.goto("API", "/cart")
     
     # 4. 검증: UI상에 상품이 있는지 확인
 
