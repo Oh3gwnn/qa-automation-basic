@@ -68,7 +68,7 @@ pytest --html=reports/report.html --self-contained-html
 
 **특정 테스트 실행 (UI 모드)**
 ```bash
-pytest --html=reports/report.html --self-contained-html
+pytest tests/ui/test_checkout_flow.py --headed
 ```
 
 ---
