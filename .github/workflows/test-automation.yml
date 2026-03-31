@@ -1,4 +1,4 @@
-name: Playwright Tests (Python)
+name: QA Automation CI
 on:
   push:
     branches: [ main, master ]
@@ -6,7 +6,7 @@ on:
     branches: [ main, master ]
 jobs:
   test:
-    timeout-minutes: 10
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -24,8 +24,15 @@ jobs:
     - name: Ensure browsers are installed
       run: python -m playwright install --with-deps
 
-    - name: Run Playwright tests
-      run: pytest tests/ui/test_main_flow.py --html=reports/result.html --self-contained-html
+    - name: Run All Tests
+      env:
+        UI_BASE_URL: ${{ secrets.UI_BASE_URL }}
+        API_BASE_URL: ${{ secrets.API_BASE_URL }}
+        SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+        SAUCE_PASSWORD: ${{ secrets.SAUCE_PASSWORD }}
+        VARIANT_ID: ${{ secrets.VARIANT_ID }}
+      
+      run: pytest --html=reports/report.html --self-contained-html
 
     - name: Upload Report
       if: always()
