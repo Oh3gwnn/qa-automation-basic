@@ -4,13 +4,24 @@ import pytest
 import base64
 import pytest_html
 from dotenv import load_dotenv
+from datetime import datetime
 
 #1 [.env 자동화]
-if not os.path.exists(".env") and os.path.exists(".env.example"):
-    shutil.copy(".env.example", ".env")
+def setup_env():
+    if not os.path.exists(".env") and os.path.exists(".env.example"):
+        try:
+            shutil.copy(".env.example", ".env")
+            print("\n[Auto-Setup] Created .env from .env.example")
+        except Exception as e:
+            print(f"\n[Auto-Setup] Failed to create .env: {e}")
+    load_dotenv(override=True)
 
-#2 [환경 변수 로드]
-load_dotenv(override=True)
+setup_env()
+
+# 2. [리포트 상단 메타데이터 커스텀]
+def pytest_html_report_title(report):
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    report.title = f"QA Automation Report ({now})"
 
 #3 [UI TEST - failed - Screenshot-hook] 
 @pytest.hookimpl(hookwrapper=True)
