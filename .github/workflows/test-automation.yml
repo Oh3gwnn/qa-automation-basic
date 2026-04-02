@@ -45,3 +45,13 @@ jobs:
         name: pytest-report
         path: reports/
         retention-days: 30 
+
+    - name: Notify to Slack
+      if: always()  # 성공/실패 상관없이 항상 알림 전송
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_TITLE: "QA Automation Test Results"
+        SLACK_MESSAGE: "테스트 실행 완료! GitHub Actions에서 리포트를 확인하세요."
+        SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
+        SLACK_USERNAME: "QA 자동화 봇"
